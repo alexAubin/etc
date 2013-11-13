@@ -23,7 +23,8 @@ export LS_COLORS
 # PS1 #
 #######
 
-PS1="[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\n > "
+PS1='\[\e]0;$WINDOWTITLE \a\][\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\n > '
+export WINDOWTITLE=$HOSTNAME
 
 ######################
 # Mapping to scripts #
