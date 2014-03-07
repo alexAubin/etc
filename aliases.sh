@@ -48,5 +48,5 @@ unset SSH_ASKPASS
 setxkbmap -option "nbsp:none"
 
 # Use english for ls -l, g++ errors and so on
-LANG="en_US"
+export LANG="en_US"
 
