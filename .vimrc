@@ -44,7 +44,7 @@ set background=dark     " If using dark background
 colorscheme elflord     " Color theme
 
 " Set encoding to UTF8
-" set encoding=utf-8
+set encoding=utf-8
 
 " Fix backspace key
 " fixdel
