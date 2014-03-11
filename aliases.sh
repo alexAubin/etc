@@ -21,8 +21,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 ##############
 
 alias ls='ls --color=auto'
-LS_COLORS='di=1;34:fi=0:ln=1;31:pi=1;5:so=1;5:bd=1;5:or=1;31:mi=0:ex=1;32:*.rpm=1;90:*.C=1;35:*.cc=1;35:*.cpp=1;35:*.h=0;35'
-export LS_COLORS
+export LS_COLORS='di=1;34:fi=0:ln=1;31:pi=1;5:so=1;5:bd=1;5:or=1;31:mi=0:ex=1;32:*.rpm=1;90:*.C=1;35:*.cc=1;35:*.cpp=1;35:*.h=0;35'
 
 #######
 # PS1 #
@@ -39,7 +38,8 @@ WINDOWTITLE=$1
 ######################
 
 alias launchScreen='~/littleScripts/launchScreen'
-alias makec='make 2>&1 | python ~/littleScripts/colorGcc.py'
+export GCCPARSER="2>&1 | python ~/littleScripts/colorGcc.py"
+alias makec='make $GCCPARSER'
 
 ##############
 # Misc stuff #
@@ -49,7 +49,7 @@ alias makec='make 2>&1 | python ~/littleScripts/colorGcc.py'
 unset SSH_ASKPASS
 
 # Prevent non-breakable spaces and otha shet
-setxkbmap -option "nbsp:none"
+setxkbmap -option "nbsp:none" 2> /dev/null
 
 # Use english for ls -l, g++ errors and so on
 export LANG="en_US"
