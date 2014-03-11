@@ -4,6 +4,10 @@
 # Standard aliases #
 ####################
 
+alias apt-search='sudo apt-cache search'
+alias apt-install='sudo apt-get install'
+alias apt-remove='sudo apt-get remove'
+
 alias ll='ls -l'
 alias grep='grep --color=auto'
 alias top='top -i'
