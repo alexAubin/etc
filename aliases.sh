@@ -12,9 +12,15 @@ alias ll='ls -l'
 alias grep='grep --color=auto'
 alias top='top -i'
 
+##################################
+# In-console notification system #
+##################################
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias alert='echo "    $(date +%a" "%d" "%b" @ "%T) :: $(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'') :: completed" >> ~/.notifications'
+
+alias checkNotifications='cat ~/.notifications && rm ~/.notifications'
 
 ##############
 # Colored ls #
@@ -27,7 +33,16 @@ export LS_COLORS='di=1;34:fi=0:ln=1;31:pi=1;5:so=1;5:bd=1;5:or=1;31:mi=0:ex=1;32
 # PS1 #
 #######
 
-PS1='\[\e]0;$WINDOWTITLE \a\][\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\n > '
+# Window-title trick
+PS1='\[\e]0;$WINDOWTITLE \a\]'
+# Username, host and pwd
+PS1="$PS1"'[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]'
+# Notifications
+PS1="$PS1"'$(if [ -f ~/.notifications ]; then echo " [\033[01;31m"`cat ~/.notifications | wc -l` "notification\033[00m]"; fi)'
+# New line for the user input
+PS1="$PS1"'\n > '
+
+
 export WINDOWTITLE=$HOSTNAME
 function title {
 WINDOWTITLE=$1
@@ -39,7 +54,7 @@ WINDOWTITLE=$1
 
 alias launchScreen='~/littleScripts/launchScreen'
 export GCCPARSER="2>&1 | python ~/littleScripts/colorGcc.py"
-alias makec='make $GCCPARSER'
+alias makec="make $GCCPARSER"
 
 ##############
 # Misc stuff #
