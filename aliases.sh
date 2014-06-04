@@ -54,3 +54,7 @@ setxkbmap -option "nbsp:none" 2> /dev/null
 # Use english for ls -l, g++ errors and so on
 export LANG="C"
 
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+

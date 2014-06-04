@@ -12,7 +12,9 @@ setlocal spelllang=fr
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif      
 
 " Load indentation rules and plugins according to detected filetype
-filetype plugin indent on 
+filetype indent on 
+filetype plugin on 
+let g:tex_flavor='latex'
 
 " Editor option
 set showcmd             " Show command in status line
@@ -42,6 +44,8 @@ set autochdir           " Changer automatiquement de répertoire de travail.
 syntax on               " Syntax highlighting
 set background=dark     " If using dark background
 colorscheme elflord     " Color theme
+" Adding .pde as cpp files (for Arduino dev)
+au BufNewFile,BufRead *.pde set filetype=cpp
 
 " Set encoding to UTF8
 set encoding=utf-8
@@ -53,4 +57,5 @@ set encoding=utf-8
 "if filereadable("/etc/vim/vimrc.local")
 "  source /etc/vim/vimrc.local
 "endif
+
 
