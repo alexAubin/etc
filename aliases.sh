@@ -55,6 +55,8 @@ WINDOWTITLE=$1
 alias launchScreen='~/littleScripts/launchScreen'
 export GCCPARSER="2>&1 | python ~/littleScripts/colorGcc.py"
 alias makec="make $GCCPARSER"
+alias octopus="~/littleScripts/octopus"
+alias harvestProdOnDPM="~/littleScripts/harvestProdOnDPM"
 
 ##############
 # Misc stuff #
