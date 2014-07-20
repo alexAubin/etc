@@ -11,6 +11,8 @@ alias apt-remove='sudo apt-get remove'
 alias ll='ls -l'
 alias grep='grep --color=auto'
 alias top='top -i'
+alias diff='git diff --no-index'
+alias time='/usr/bin/time -f "\n Command took %E (%U user, %S system, %MKo memory)"'
 
 ##################################
 # In-console notification system #
@@ -57,6 +59,19 @@ export GCCPARSER="2>&1 | python ~/littleScripts/colorGcc.py"
 alias makec="make $GCCPARSER"
 alias octopus="~/littleScripts/octopus"
 alias harvestProdOnDPM="~/littleScripts/harvestProdOnDPM"
+
+#########################
+# Progress bar function #
+#########################
+
+function progressBar {
+   echo -n " [$1]   ["
+   for I in `seq 1 $((100 * $2 / ($3 * 4)))`;      do echo -n '='; done;
+   for I in `seq 1 $((25 - 100 * $2 / ($3 * 4)))`; do echo -n ' '; done;
+   echo "]   $(( 100 * $2 / $3))%  ($2/$3)  $(($3-$2)) remaining"
+}
+
+#alias space='progressBar derp `df $1 | tail -n1 | awk '{printf "%d %d", ($3-$4)/(1024*1024), $3/(1024*1024) }'`'
 
 ##############
 # Misc stuff #
