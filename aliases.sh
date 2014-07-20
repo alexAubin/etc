@@ -86,6 +86,7 @@ setxkbmap -option "nbsp:none" 2> /dev/null
 # Use english for ls -l, g++ errors and so on
 export LANG="C"
 
+# Use up and down arrow in the command line to search for command starting with what's already written
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
