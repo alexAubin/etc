@@ -8,7 +8,7 @@ alias apt-search='sudo apt-cache search'
 alias apt-install='sudo apt-get install'
 alias apt-remove='sudo apt-get remove'
 
-alias ll='ls -l'
+alias ll='ls -lh'
 alias grep='grep --color=auto'
 alias top='top -i'
 alias diff='git diff --no-index'
@@ -35,20 +35,12 @@ export LS_COLORS='di=1;34:fi=0:ln=1;31:pi=1;5:so=1;5:bd=1;5:or=1;31:mi=0:ex=1;32
 # PS1 #
 #######
 
-# Window-title trick
-PS1='\[\e]0;$WINDOWTITLE \a\]'
 # Username, host and pwd
-PS1="$PS1"'[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]'
+PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]'
 # Notifications
 PS1="$PS1"'$(if [ -f ~/.notifications ]; then echo " [\033[01;31m"`cat ~/.notifications | wc -l` "notification\033[00m]"; fi)'
 # New line for the user input
 PS1="$PS1"'\n > '
-
-
-export WINDOWTITLE=$HOSTNAME
-function title {
-WINDOWTITLE=$1
-}
 
 ######################
 # Mapping to scripts #
@@ -57,21 +49,9 @@ WINDOWTITLE=$1
 alias launchScreen='~/littleScripts/launchScreen'
 export GCCPARSER="2>&1 | python ~/littleScripts/colorGcc.py"
 alias makec="make $GCCPARSER"
-alias octopus="~/littleScripts/octopus"
-alias harvestProdOnDPM="~/littleScripts/harvestProdOnDPM"
-
-#########################
-# Progress bar function #
-#########################
-
-function progressBar {
-   echo -n " [$1]   ["
-   for I in `seq 1 $((100 * $2 / ($3 * 4)))`;      do echo -n '='; done;
-   for I in `seq 1 $((25 - 100 * $2 / ($3 * 4)))`; do echo -n ' '; done;
-   echo "]   $(( 100 * $2 / $3))%  ($2/$3)  $(($3-$2)) remaining"
-}
-
-#alias space='progressBar derp `df $1 | tail -n1 | awk '{printf "%d %d", ($3-$4)/(1024*1024), $3/(1024*1024) }'`'
+alias rfdirStar="~/IPHCTools/rfdirStar"
+alias octopus="~/IPHCTools/octopus.sh"
+alias harvestDPM="~/IPHCTools/DPMharvester.sh"
 
 ##############
 # Misc stuff #
