@@ -42,16 +42,13 @@ PS1="$PS1"'$(if [ -f ~/.notifications ]; then echo " [\033[01;31m"`cat ~/.notifi
 # New line for the user input
 PS1="$PS1"'\n > '
 
-######################
-# Mapping to scripts #
-######################
+########
+# Misc #
+########
 
-alias launchScreen='~/littleScripts/launchScreen'
 export GCCPARSER="2>&1 | python ~/littleScripts/colorGcc.py"
-alias makec="make $GCCPARSER"
-alias rfdirStar="~/IPHCTools/rfdirStar"
-alias octopus="~/IPHCTools/octopus.sh"
-alias harvestDPM="~/IPHCTools/DPMharvester.sh"
+
+alias reloadXdefaults="xrdb -load ~/.Xdefaults"
 
 ##############
 # Misc stuff #
