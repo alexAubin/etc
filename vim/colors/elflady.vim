@@ -1,18 +1,39 @@
 
+set background=dark
+hi clear
+if exists("syntax_on")
+  syntax reset
+endif
+"let cBackg = "234"
+"let cForeg = "250"
+"let cBlack = "00"
+"let cDkYel = "DarkYellow"
+"let cLtYel = "Yellow"
+"let cGrray = "Grey"
+"let cDkRed = "DarkRed"
+"let cLtRed = "Red"
+"let cDkBlu = "LightBlue"
+"let cLtBlu = "Blue"
+"let cDkCya = "Cyan"
+"let cLtGre = "LightGreen"
+"let cLtCya = "LightCyan"
+"let cLtGre = "70"
 
-let cBackg = "234"
-let cForeg = "250"
-let cBlack = "00"
-let cDkYel = "11"
-let cLtYel = "185"
-let cGrray = "243"
-let cDkRed = "01"
-let cLtRed = "167"
-let cDkBlu = "04"
-let cLtBlu = "31"
-let cDkCya = "06"
-let cLtGre = "70"
-let cLtCya = "14"
+"if exists('base16colorspace') && base16colorspace == "256"
+    let cBackg = "234"
+    let cForeg = "250"
+    let cBlack = "00"
+    let cDkYel = "11"
+    let cLtYel = "185"
+    let cGrray = "243"
+    let cDkRed = "01"
+    let cLtRed = "167"
+    let cDkBlu = "04"
+    let cLtBlu = "31"
+    let cDkCya = "06"
+    let cLtGre = "70"
+    let cLtCya = "14"
+"endif
 
 execute "hi Bold                                                            cterm=bold"
 execute "hi Debug                    ctermfg=".cDkRed
@@ -28,7 +49,7 @@ execute "hi MatchParen               ctermfg=".cBackg." ctermbg=".cGrray
 execute "hi ModeMsg                  ctermfg=".cLtYel
 execute "hi MoreMsg                  ctermfg=".cLtYel
 execute "hi Question                 ctermfg=".cDkBlu
-execute "hi Search                   ctermfg=".cGrray." ctermbg=".cLtBlu
+execute "hi Search                   ctermfg=".cBlack." ctermbg=".cGrray
 execute "hi SpecialKey               ctermfg=".cGrray
 execute "hi TooLong                  ctermfg=".cDkRed
 execute "hi Underlined               ctermfg=".cDkRed
@@ -38,7 +59,7 @@ execute "hi WarningMsg               ctermfg=".cDkRed
 execute "hi WildMenu                 ctermfg=".cDkRed
 execute "hi Title                    ctermfg=".cDkBlu."                     cterm=none"
 execute "hi Conceal                  ctermfg=".cDkBlu." ctermbg=".cBackg
-execute "hi Cursor                   ctermfg=".cBackg." ctermbg=".cForeg
+execute "hi Cursor                   ctermfg=".cBackg." ctermbg=".cGrray
 execute "hi NonText                  ctermfg=".cGrray
 execute "hi Normal                   ctermfg=".cForeg." ctermbg=".cBackg
 execute "hi LineNr                   ctermfg=".cGrray." ctermbg=".cBackg
@@ -67,7 +88,7 @@ execute "hi Define                   ctermfg=".cLtGre."                     cter
 execute "hi Delimiter                ctermfg=".cLtCya
 execute "hi Float                    ctermfg=".cLtRed
 execute "hi Function                 ctermfg=".cDkBlu
-execute "hi Identifier               ctermfg=".cLtGre."                     cterm=none"
+execute "hi Identifier               ctermfg=".cLtGre
 execute "hi Include                  ctermfg=".cDkBlu."                     cterm=bold"
 execute "hi Keyword                  ctermfg=".cLtGre
 execute "hi Label                    ctermfg=".cLtBlu
@@ -82,16 +103,16 @@ execute "hi StorageClass             ctermfg=".cLtBlu
 execute "hi String                   ctermfg=".cLtYel
 execute "hi Structure                ctermfg=".cLtGre
 execute "hi Tag                      ctermfg=".cDkBlu
-execute "hi Todo                     ctermfg=".cLtBlu." ctermbg=".cBlack
+execute "hi Todo                     ctermfg=".cLtYel." ctermbg=".cBlack."  cterm=bold"
 execute "hi Type                     ctermfg=".cLtBlu."                     cterm=bold"
 execute "hi Typedef                  ctermfg=".cLtBlu
                                     
 " C highlighting                    
 execute "hi cOperator                ctermfg=".cDkCya
 execute "hi cPreCondit               ctermfg=".cLtGre
-         
 execute "hi cCustomFunc              ctermfg=".cForeg."                     cterm=bold"
 execute "hi cCustomClass             ctermfg=".cForeg."                     cterm=bold"
+execute "hi cDefine                  ctermfg=".cDkBlu."                     cterm=bold"
 
 " CSS highlighting                  
 execute "hi cssBraces                ctermfg=".cForeg
@@ -144,6 +165,7 @@ execute "hi NERDTreeExecFile         ctermfg=".cForeg
 execute "hi phpMemberSelector        ctermfg=".cForeg
 execute "hi phpComparison            ctermfg=".cForeg
 execute "hi phpParent                ctermfg=".cForeg
+execute "hi phpIdentifier            ctermfg=".cLtBlu." cterm=none"
 
 " Python highlighting
 execute "hi pythonOperator           ctermfg=".cLtGre

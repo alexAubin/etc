@@ -9,8 +9,8 @@
 [themes]
    [theme]
 	 # Font
-	 #font = "-*-ohsnap.icons-medium-*-*-*-11-*-*-*-*-*-*-*"
-	 font = "inconsolata-10"
+	 font = "-*-ohsnap.icons-medium-*-*-*-11-*-*-*-*-*-*-*"
+	 #font = "inconsolata-10"
 	     
 	 # Bars
 	 bars_width = 18
@@ -81,7 +81,8 @@
       [tag] name = "doc"        layout="tile_grid"    [/tag]
       [tag] name = "mail"       layout="tile_grid"    [/tag]
       [tag] name = "irc"        layout="tile_grid"    [/tag]
-      [tag] name = "dev"        layout="tile_grid"    [/tag]
+      [tag] name = "dev1"        layout="tile_grid"    [/tag]
+      [tag] name = "dev2"        layout="tile_grid"    [/tag]
 
       # Mousebinds associated to Tags element button
       [mouse] button = "1" func = "tag_click" [/mouse]
