@@ -3,7 +3,7 @@
 # inspired by addikt1ve, rhaamo, linkdd and some others
 
 # volume
-_volume() {
+volume() {
 
     status=`amixer -c 0 sget 'Master' | tail -n1 | awk '{ print $6 }' | sed -re 's/^\[*//' | cut -d\] -f1`
     if [[ $status == on ]]; then
@@ -13,40 +13,66 @@ _volume() {
     fi
 
     color="#5ca8a7"
+    echo "^p[1016;7;30;2;0;$vol;100;#333333;$color]"
+}
 
-    volume="^s[right;$color;vol $vol]"
+
+#!/bin/bash
+
+cpu(){
+    cpu="$(eval $(awk '/^cpu /{print "previdle=" $5 "; prevtotal=" $2+$3+$4+$5 }' /proc/stat); sleep 0.4;
+          eval $(awk '/^cpu /{print "idle=" $5 "; total=" $2+$3+$4+$5 }' /proc/stat);
+          intervaltotal=$((total-${prevtotal:-0}));
+          echo "$((100*( (intervaltotal) - ($idle-${previdle:-0}) ) / (intervaltotal) ))")"
+    echo "^g[1050;2;30;12;$cpu;100;#333333;#1166DD;cpugraph]"
 }
 
 # memory used
-_memory() {
+ram() {
     total=`free -m -t | head -n2 | tail -n1 | awk '{print $2}'`
     used=`free -m -t | head -n2 | tail -n1 | awk '{print $3}'`
     mem=$((100*$used/$total))
     
-    color="#f96d6d"
-
-    memory="^s[right;$color;mem $mem%]"
+    color="#c9cd6d"
+    echo "^p[1086;12;30;2;0;$mem;100;#333333;$color]"
 }
 
 #swap used
-_swap() {
+swap() {
     total=`free -m -t | tail -n1 | awk '{print $2}'`
     used=`free -m -t | tail -n1 | awk '{print $3}'`
     mem=$((100*$used/$total))
 
     color="#faa125"
-
-    swap="^s[right;$color;swap $mem%]"
+    echo "^p[1086;7;30;2;0;$mem;100;#333333;$color]"
 }
 
 # hdd used
-_hdd() {
+hdd() {
     total=`df -h --total | tail -n1 | awk '{print $2}' | sed 's/G//g'`
     used=` df -h --total | tail -n1 | awk '{print $3}' | sed 's/G//g'`
     
     hdd=$((100*$used/$total))
-    color="#fad325"
-    hdd="^s[right;$color;hdd $hdd%]"
+    color="#3ac325"
+    echo "^p[1086;2;30;2;0;$hdd;100;#333333;$color]"
+}
+
+
+avgping() {
+    # Ping once
+    ping=`ping 8.8.8.8 -c 1 | grep '64 bytes' | tr '=' ' ' | awk '{ print $10 }'`
+    if [[ $ping == "" ]]; then ping=9999; fi
+    echo $ping >> ~/.ping.log
+    # Erase first line of ping log
+    if [[ `cat ~/.ping.log | wc -l` -gt "20" ]]
+    then
+        tail -n +2 ~/.ping.log > ~/.ping.log
+    fi
+    # Average
+    avg=`awk '{ total += $1; count++ } END { print total/count }' ~/.ping.log`
+    # Display
+    color="#b4c862"
+    echo "^p[1016;2;30;2;0;$avg;300;#333333;$color]"
 }
 
 # wifi
@@ -76,25 +102,42 @@ _date() {
     date="^s[right;$color;$day $hour]"
 }
 
-_battery() {
+battery() {
    device=`upower -e | grep 'bat'`
    info=`upower -i $device | sed 's/ //g' | tr ':' ' '`
    state=`     upower -i $device | sed 's/ //g' | tr ':' ' ' | grep "state"                | awk '{print $2}'` 
    time=`      upower -i $device | sed 's/ //g' | tr ':' ' ' | grep "timetoempty\|tofull"  | awk '{print $2}' | sed 's/hours/h/g' | sed 's/minutes/min/g'`
-   percentage=`upower -i $device | sed 's/ //g' | tr ':' ' ' | grep "percentage"           | awk '{print $2}'` 
-  
+   percentage=`upower -i $device | sed 's/ //g' | tr ':' ' ' | grep "percentage" | tr '%' ' ' | awk '{print $2}' ` 
+    
    if [[ $state == "discharging" ]]; then
-       state="v"
+       #state="v"
+       color="#f090e4"
    else
-       state="^"
+       #state="^"
+       color="#c090e4"
    fi
-   battery="$state ${percentage}, ${time}"
-   color="#c090e4"
-   battery="^s[right;$color;$battery]"
+   
+   if [[ $state == "discharging" ]]; then
+        if [[ $percentage -lt "10" ]]; then
+            colorwarn="#c02020"
+            echo "^s[500;14;$colorwarn;Warning : low battery !]"
+        fi
+    fi
+    
+   echo "^p[1016;12;30;2;0;$percentage;100;#333333;$color]"
+
+   #if [[ $percentage == "100%" ]]; then
+   #     battery=$percentage
+   #else
+   #     battery="$state ${percentage}, ${time}"
+   #fi
+
+   #color="#c090e4"
+   #battery="^s[right;$color;$battery]"
 }
 
 # statustext
-statustext() {
+updateStatusText() {
     first=1
     args=""
     for arg in $@; do
@@ -107,11 +150,18 @@ statustext() {
         _${arg}
         args="${args} `eval echo '$separator$'$arg`"
     done
+    args="${args} $(volume)"
+    args="${args} $(battery)"
+    args="${args} $(avgping)"
+    args="${args} $(cpu)"
+    args="${args} $(ram)"
+    args="${args} $(swap)"
+    args="${args} $(hdd)"
     wmfs -c status "default $args"
 }
 
 while true;
 do
-    statustext volume wifi hdd swap memory battery date
+    updateStatusText date
     sleep 1
 done

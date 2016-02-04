@@ -213,15 +213,15 @@
     #[key] mod = {"Super"}            key = "t"     func = "client_tab_next_opened" [/key]
 
     # Layout manipulation
-    #[key] mod = {"Super"}          key = "m" func = "layout_vmirror" [/key]
-    #[key] mod = {"Super", "Shift"} key = "m" func = "layout_hmirror" [/key]
-    #[key] mod = {"Super"}          key = "r" func = "layout_rotate_right" [/key]
-    #[key] mod = {"Super", "Shift"} key = "r" func = "layout_rotate_left" [/key]
+    [key] mod = {"Control", "Alt"} key = "Down"  func = "layout_vmirror" [/key]
+    [key] mod = {"Control", "Alt"} key = "Up"    func = "layout_hmirror" [/key]
+    [key] mod = {"Control", "Alt"} key = "Right" func = "layout_rotate_right" [/key]
+    [key] mod = {"Control", "Alt"} key = "Left"  func = "layout_rotate_left" [/key]
 
-    #[key] mod = {"Control", "Super", "Alt"} key = "h" func = "layout_integrate_left" [/key]
-    #[key] mod = {"Control", "Super", "Alt"} key = "j" func = "layout_integrate_bottom" [/key]
-    #[key] mod = {"Control", "Super", "Alt"} key = "k" func = "layout_integrate_top" [/key]
-    #[key] mod = {"Control", "Super", "Alt"} key = "l" func = "layout_integrate_right" [/key]
+    [key] mod = {"Control", "Super"} key = "Left"  func = "layout_integrate_left" [/key]
+    [key] mod = {"Control", "Super"} key = "Down"  func = "layout_integrate_bottom" [/key]
+    [key] mod = {"Control", "Super"} key = "Up"    func = "layout_integrate_top" [/key]
+    [key] mod = {"Control", "Super"} key = "Right" func = "layout_integrate_right" [/key]
 
     # Layout set historic travelling function (TESTING)
     [key] mod = {"Super"}          key = "o" func = "layout_prev_set" [/key]
