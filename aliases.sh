@@ -67,8 +67,11 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
-# Use up and down arrow in the command line to search for command starting with what's already written
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-
+# If interactive
+if [ -t 1 ]
+then
+    # Use up and down arrow in the command line to search for command starting with what's already written
+    bind '"\e[A": history-search-backward'
+    bind '"\e[B": history-search-forward'
+fi
 
