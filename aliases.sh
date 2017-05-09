@@ -63,9 +63,9 @@ unset SSH_ASKPASS
 setxkbmap -option "nbsp:none" 2> /dev/null
 
 # Use english for ls -l, g++ errors and so on
-export LC_ALL=en_GB.UTF-8
-export LANG=en_GB.UTF-8
-export LANGUAGE=en_GB.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
 # Use up and down arrow in the command line to search for command starting with what's already written
 bind '"\e[A": history-search-backward'
