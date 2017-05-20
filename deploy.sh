@@ -5,7 +5,7 @@ if command -v apt >/dev/null 2>&1; then
     sudo apt update
     sudo apt install git vim
 else
-if command -d pacman >/dev/null 2>&1; then
+if command -v pacman >/dev/null 2>&1; then
     sudo pacman -Sy
     sudo pacman -S git vim
 fi fi
