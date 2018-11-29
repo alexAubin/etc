@@ -1,16 +1,11 @@
 #!/bin/bash
 
-# Install basic commands
-if command -v apt >/dev/null 2>&1; then
-    sudo apt update
-    sudo apt install git vim
-else
-if command -v pacman >/dev/null 2>&1; then
-    sudo pacman -Sy
-    sudo pacman -S git vim
-fi fi
-
 cd
+
+# Install basic commands
+DEPS="git vim python-pip"
+sudo apt update
+sudo apt install $DEPS
 
 # Clone this repo
 git clone https://github.com/alexAubin/etc ~/etc
@@ -35,6 +30,5 @@ ln -s ~/etc/flake8.conf ~/.flake8
 echo "source ~/etc/aliases.sh" >> ~/.bashrc
 ln -s ~/etc/git.conf ~/.gitconfig
 ln -s ~/etc/urxvt.conf ~/.Xdefaults
-ln -s ~/etc/ssh.conf ~/.ssh/config
 
 source ~/.bashrc
