@@ -35,12 +35,12 @@ export LS_COLORS='di=1;34:fi=0:ln=1;31:pi=1;5:so=1;5:bd=1;5:or=1;31:mi=0:ex=1;32
 # PS1 #
 #######
 
-# Username, host and pwd
-PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]'
-# Notifications
-PS1="$PS1"'$(if [ -f ~/.notifications ]; then echo " [\033[01;31m"`cat ~/.notifications | wc -l` "notification\033[00m]"; fi)'
-# New line for the user input
-PS1="$PS1"'\n > '
+if [[ $USER == "root" ]];
+then
+   PS1='[\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\n > '
+else
+   PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\n > '
+fi
 
 ########
 # Misc #
