@@ -3,7 +3,7 @@
 cd
 
 # Install basic commands
-DEPS="git vim python-pip"
+DEPS="git vim python-pip exuberant-ctags"
 sudo apt update
 sudo apt install $DEPS
 
