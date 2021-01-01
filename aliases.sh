@@ -14,6 +14,13 @@ alias top='top -i'
 alias diff='git diff --no-index'
 alias time='/usr/bin/time -f "\n Command took %E (%U user, %S system, %MKo memory)"'
 
+alias wifi="nmcli d wifi"
+alias comeoninternet="while ! ping -W 2 -c 1 89.234.141.66; do sleep 0.5; done"
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'state\|percentage'"
+alias bs="/home/alex/dev/.backslide/node_modules/backslide/bin/bs"
+alias weather="curl http://wttr.in/ 2>/dev/null | head -n 7"
+alias moon="curl http://wttr.in/moon"
+
 ##################################
 # In-console notification system #
 ##################################
@@ -74,4 +81,3 @@ then
     bind '"\e[A": history-search-backward'
     bind '"\e[B": history-search-forward'
 fi
-
