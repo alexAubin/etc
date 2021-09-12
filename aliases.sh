@@ -21,6 +21,8 @@ alias bs="/home/alex/dev/.backslide/node_modules/backslide/bin/bs"
 alias weather="curl http://wttr.in/ 2>/dev/null | head -n 7"
 alias moon="curl http://wttr.in/moon"
 
+alias fix-github-origin="git remote set-url --push origin git@github.com:\$(git remote -v | grep \"origin.*push\" | awk '{print \$2}' | sed \"s@https://github.com/@@\").git"
+
 ##################################
 # In-console notification system #
 ##################################
